@@ -78,6 +78,7 @@ func getExchange() (*Exchange, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 200*time.Millisecond)
 	defer cancel()
 
+	// Create request
 	req, error := http.NewRequestWithContext(ctx, "GET", "https://economia.awesomeapi.com.br/json/last/USD-BRL", nil)
 	// req, error := http.NewRequestWithContext(ctx, "GET", "http://localhost:3001/USD-BRL", nil)
 	if error != nil {
@@ -113,6 +114,7 @@ func saveToDatabase(exchange *Exchange) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Millisecond)
 	defer cancel()
 
+	// Open database
 	db, err := gorm.Open(sqlite.Open("exchangeDb.sqlite"), &gorm.Config{})
 	if err != nil {
 		panic("failed to connect database")
